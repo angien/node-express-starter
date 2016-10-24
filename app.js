@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var handlebars = require('express-handlebars');
 var mongoose = require('mongoose');
 
 var app = require('express')();
@@ -19,8 +18,8 @@ var http = require('http').Server(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // look for view html in the views directory
-app.engine('html', handlebars({ extname: '.html' }));
 app.set('views', path.join(__dirname, 'public', 'views'));
+app.engine('.html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 // setting up routes
